@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
 
-sleep 5
-
-curl http://$(minikube ip):30080/health
+echo "Rolling back to BLUE..."
+kubectl patch svc mini-app-service -n mini-prod --type=merge -p '{"spec":{"selector":{"app":"mini-app","version":"blue"}}}'
+echo "Traffic switched to BLUE"
