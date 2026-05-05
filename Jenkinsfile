@@ -2,11 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/Blendgashi05/mini-prod-devops.git'
-            }
-        }
 
         stage('Test') {
             steps {
