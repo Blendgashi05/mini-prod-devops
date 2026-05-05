@@ -104,6 +104,29 @@ GitHub → Jenkins → Test → Build → Terraform → Ansible → Deploy → S
 
 ---
 
+## 📊 11. Monitoring (Prometheus / Grafana)
+
+Prometheus përdoret për metrika, ndërsa Grafana për vizualizim.
+
+Hap Prometheus:
+http://localhost:9090
+
+Hap Grafana:
+http://localhost:3000
+
+Në Grafana:
+- Add data source → Prometheus
+- URL: http://prometheus:9090
+- Save & Test
+
+---
+
+## 🔁 12. Rollback Demo / Failure Simulation
+
+Për të simuluar problem në Green:
+
+```bash
+docker stop mini-app-local
 ## 📂 Struktura
 
 mini-prod/
