@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/USERNAME/REPO.git'
+                git 'https://github.com/Blendgashi05/mini-prod-devops.git'
             }
         }
 
