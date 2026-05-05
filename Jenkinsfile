@@ -53,7 +53,7 @@ pipeline {
 
     post {
         failure {
-            sh './scripts/ci/rollback.sh'
+            echo "Pipeline failed - rollback skipped"
         }
     }
 }
