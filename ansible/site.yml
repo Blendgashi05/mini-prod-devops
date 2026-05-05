@@ -1,0 +1,7 @@
+---
+- name: Bootstrap local mini-prod environment
+  hosts: local
+  become: false
+
+  roles:
+    - bootstrap

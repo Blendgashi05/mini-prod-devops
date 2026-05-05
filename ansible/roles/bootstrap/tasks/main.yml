@@ -1,0 +1,70 @@
+---
+- name: Check docker version
+  command: docker --version
+  register: docker_version
+  changed_when: false
+
+- name: Show docker version
+  debug:
+    var: docker_version.stdout
+
+- name: Check kubectl version
+  command: kubectl version --client
+  register: kubectl_version
+  changed_when: false
+  ignore_errors: true
+
+- name: Show kubectl version
+  debug:
+    var: kubectl_version.stdout
+  when: kubectl_version.rc == 0
+
+- name: Check minikube version
+  command: minikube version
+  register: minikube_version
+  changed_when: false
+  ignore_errors: true
+
+- name: Show minikube version
+  debug:
+    var: minikube_version.stdout
+  when: minikube_version.rc == 0
+
+- name: Ensure project generated directory exists
+  file:
+    path: "{{ playbook_dir }}/../generated"
+    state: directory
+
+- name: Ensure .env exists
+  copy:
+    dest: "{{ playbook_dir }}/../.env"
+    content: |
+      APP_VERSION=v1
+      POSTGRES_DB=appdb
+      POSTGRES_USER=user
+      POSTGRES_PASSWORD=pass
+      DB_HOST=postgres
+      APP_PORT=5000
+    force: false
+
+- name: Check Kubernetes nodes
+  command: kubectl get nodes
+  register: k8s_nodes
+  changed_when: false
+  ignore_errors: true
+
+- name: Show Kubernetes nodes
+  debug:
+    var: k8s_nodes.stdout
+  when: k8s_nodes.rc == 0
+
+- name: Check Kubernetes pods
+  command: kubectl get pods --all-namespaces
+  register: k8s_pods
+  changed_when: false
+  ignore_errors: true
+
+- name: Show Kubernetes pods
+  debug:
+    var: k8s_pods.stdout
+  when: k8s_pods.rc == 0

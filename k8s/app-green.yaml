@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-green
+  namespace: mini-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mini-app
+      version: green
+  template:
+    metadata:
+      labels:
+        app: mini-app
+        version: green
+    spec:
+      containers:
+        - name: mini-app
+          image: mini-app:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          env:
+            - name: APP_VERSION
+              value: green
+            - name: DB_HOST
+              value: postgres
+            - name: POSTGRES_DB
+              value: appdb
+            - name: POSTGRES_USER
+              value: user
+            - name: POSTGRES_PASSWORD
+              value: pass
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10

@@ -1,0 +1,8 @@
+{
+  "app_version": "v1",
+  "namespace": "mini-prod",
+  "image_tag": "latest",
+  "app_port": 5000,
+  "db_host": "postgres",
+  "db_port": 5432
+}
