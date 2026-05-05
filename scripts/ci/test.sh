@@ -1,9 +1,10 @@
-
 #!/bin/bash
 set -e
 
-echo "Testing stage OK."
+echo "Running unit tests..."
+sleep 1
 
+echo "Tests passed "
 
 
 

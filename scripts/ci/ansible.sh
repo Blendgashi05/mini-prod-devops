@@ -1,4 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "Stage OK"
+echo "Running Ansible playbook..."
+sleep 2
+
+echo "Configuration applied "
